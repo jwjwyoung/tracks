@@ -26,7 +26,7 @@ module Todos
       end
 
       if params[:tag]
-        tag = Tag.where(:name => params[:tag]).first
+        tag = Tag.where("lower(name)", params[:tag].downcase).first
         not_done_todos = not_done_todos.joins(:taggings).where('taggings.tag_id = ?', tag.id)
       end
 
