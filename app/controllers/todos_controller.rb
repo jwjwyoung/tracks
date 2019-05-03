@@ -1071,7 +1071,7 @@ end
   end
 
   def determine_deferred_tag_count(tag_name)
-    tag = Tag.where(:name => tag_name).first
+    tag = Tag.where("lower(name) = ?", tag_name.downcase).first
     # tag.nil? should normally not happen, but is a workaround for #929
     @remaining_deferred_or_pending_count = tag.nil? ? 0 : current_user.todos.deferred.with_tag(tag.id).count
   end
