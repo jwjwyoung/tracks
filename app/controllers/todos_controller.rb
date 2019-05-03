@@ -908,7 +908,7 @@ end
     tag_expr.each do |tag_list|
       id_list = []
       tag_list.each do |tag|
-        tag = Tag.where(:name => tag).first
+        tag = Tag.where("lower(name) = ?", tag.downcase).first
         id_list << tag.id if tag
       end
       ids << id_list
