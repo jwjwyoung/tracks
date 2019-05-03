@@ -1001,7 +1001,7 @@ end
         @target_context_count = todos_in_target_container.active.not_hidden.count
       }
       from.tag {
-        tag = Tag.where(:name => params['_tag_name']).first
+        tag = Tag.where("lower(name) = ?", params['_tag_name'].downcase).first
         tag = Tag.new(:name => params['tag']) if tag.nil?
 
         todos_in_container, todos_in_target_container = find_todos_in_container_and_target_container(todo, @todo)
